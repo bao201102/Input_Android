@@ -121,18 +121,28 @@ public class MainActivity extends AppCompatActivity {
     public View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String name = editText_Name.getText().toString();
-            String phone = editText_Phone.getText().toString();
-            Boolean gender = switch_Gender.isChecked();
-            String level = spinner_Level.getSelectedItem().toString();
-            String age = tv_Age.getText().toString();
-            Boolean sport = checkBox_Sport.isChecked();
+            if (v.getId() == R.id.btn_Register){
+                String name = editText_Name.getText().toString();
+                String phone = editText_Phone.getText().toString();
+                Boolean gender = switch_Gender.isChecked();
+                String level = spinner_Level.getSelectedItem().toString();
+                String age = tv_Age.getText().toString();
+                Boolean sport = checkBox_Sport.isChecked();
 
-            person = new Person(name,phone,gender,level,age,sport,music);
+                person = new Person(name,phone,gender,level,age,sport,music);
 
-            Intent i = new Intent(v.getContext(),PersonActivity.class);
-            i.putExtra("person", person);
-            startActivity(i);
+                Intent i = new Intent(v.getContext(),PersonActivity.class);
+                i.putExtra("person", person);
+                startActivity(i);
+            } else if (v.getId() == R.id.btn_Cancel){
+                editText_Name.setText("");
+                editText_Phone.setText("");
+                switch_Gender.setChecked(false);
+                spinner_Level.setSelection(0);
+                seekBar_Age.setProgress(1);
+                checkBox_Sport.setChecked(false);
+                radioBtn_Rock.setChecked(true);
+            }
         }
     };
 }
